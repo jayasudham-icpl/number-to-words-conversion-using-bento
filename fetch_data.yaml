@@ -1,0 +1,16 @@
+input:
+  file:
+    paths: ["config.yaml"]
+
+pipeline:
+  processors:
+    - http:
+        url: "http://127.0.0.1:5000/data"
+        verb: GET
+    - mapping: |
+        root.words = this.value  
+
+output:
+  file:
+    path: "output.json"
+    codec: lines
